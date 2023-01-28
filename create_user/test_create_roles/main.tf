@@ -46,3 +46,9 @@ resource "prismacloud_user_role" "example" {
         only_allow_compute_access = each.value.only_allow_compute_access
     }  
 }
+
+output "acc_role_ids" {
+  value = tomap({
+    for k, inst in prismacloud_user_role.example : k => inst.id
+  })
+}

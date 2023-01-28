@@ -38,3 +38,9 @@ resource "prismacloud_user_profile" "example" {
     time_zone = each.value.time_zone
     default_role_id = each.value.default_role_id
 }
+
+output "acc_user_ids" {
+  value = tomap({
+    for k, inst in prismacloud_user_profile.example : k => inst.id
+  })
+}
